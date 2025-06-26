@@ -362,12 +362,17 @@ export default function WordCascadeGame() {
     const today = new Date().getDay()
     return DAILY_CHALLENGES[today as keyof typeof DAILY_CHALLENGES]
   })
-  const [dailyChallengeCompleted, setDailyChallengeCompleted] = useState(() => {
-    // Check if challenge was completed today
-    const today = new Date().toDateString()
-    const completedDate = localStorage.getItem("dailyChallengeCompletedDate")
-    return completedDate === today
-  })
+  const [dailyChallengeCompleted, setDailyChallengeCompleted] = useState(false);
+
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const completedDate =
+      typeof window !== "undefined"
+        ? localStorage.getItem("dailyChallengeCompletedDate")
+        : null;
+    setDailyChallengeCompleted(completedDate === today);
+  }, []);
+
   const [isDailyChallengeMode, setIsDailyChallengeMode] = useState(false)
 
   // Check if it's a new day and reset daily challenge
