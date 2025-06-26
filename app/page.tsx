@@ -1132,7 +1132,7 @@ export default function WordCascadeGame() {
                     ) : (
                       <div className="text-center">
                         <div className="text-xs">{puzzle.id + 1}</div>
-                        <div className="text-xs">{puzzle.attempts}</div>
+                        {/* <div className="text-xs">{puzzle.attempts}</div> */}
                       </div>
                     )}
                   </button>
@@ -1146,7 +1146,7 @@ export default function WordCascadeGame() {
                     <div className="flex justify-between items-center">
                       <CardTitle className={themeClasses.text}>Puzzle {activePuzzleId + 1}</CardTitle>
                       <div className="flex items-center gap-2">
-                        <Badge className="bg-blue-600">{puzzles[activePuzzleId]?.attempts} attempts left</Badge>
+                        <Badge className="bg-red-500">{puzzles[activePuzzleId]?.attempts} attempts left</Badge>
                         {puzzles[activePuzzleId]?.completed && <Trophy className="w-5 h-5 text-yellow-400" />}
                       </div>
                     </div>
