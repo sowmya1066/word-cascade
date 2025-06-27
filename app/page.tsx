@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Trophy, Star, Flame, Award, Timer, Sun, Moon, AlertCircle, Target } from "lucide-react"
+import { Trophy, Star, Flame, Award, Timer, Sun, Moon, AlertCircle, Target, } from "lucide-react"
 
 // Expanded word database - in a real app, you'd use a word API or larger database
 const WORD_DATABASE = {
@@ -312,7 +312,7 @@ const DAILY_CHALLENGES = {
     category: "FOOD",
     bonus: "3x Score",
     timeLimit: 60,
-    bgColor: "from-orange-500 via-red-400 to-pink-500",
+    bgColor: "from-orange-500 via-red-300 to-pink-500",
     icon: "🍕",
   },
   6: {
@@ -699,7 +699,9 @@ export default function WordCascadeGame() {
         <div className="text-center mb-6">
           <div className="flex justify-between items-center mb-4">
             <div></div> {/* Spacer */}
-            <h1 className={`text-4xl font-bold mb-2 flex items-center justify-center gap-2 ${themeClasses.text}`}>
+            <h1
+              className={`text-3xl font-bold mb-2 flex items-center justify-center gap-2 ${themeClasses.text}`}
+            >
               <Flame className="w-8 h-8 text-orange-400" />
               Word Cascade
               <Flame className="w-8 h-8 text-orange-400" />
@@ -708,12 +710,20 @@ export default function WordCascadeGame() {
               onClick={() => setIsDarkTheme(!isDarkTheme)}
               variant="outline"
               size="sm"
-              className={`${isDarkTheme ? "bg-black/20 border-yellow-500/50 text-yellow-300" : "bg-white/50 border-gray-300 text-gray-700"}`}
+              className={`${
+                isDarkTheme
+                  ? "bg-black/20 border-yellow-500/50 text-yellow-300"
+                  : "bg-white/50 border-gray-300 text-gray-700"
+              }`}
             >
-              {isDarkTheme ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDarkTheme ? (
+                <Sun className="w-4 h-4" />
+              ) : (
+                <Moon className="w-4 h-4" />
+              )}
             </Button>
           </div>
-          <p className={themeClasses.textSecondary}>Solve multiple word puzzles simultaneously!</p>
+          {/* <p className={themeClasses.textSecondary}>Solve multiple word puzzles simultaneously!</p> */}
         </div>
 
         {!gameActive && puzzles.length === 0 ? (
@@ -722,13 +732,23 @@ export default function WordCascadeGame() {
             {/* Daily Challenge Banner - ENHANCED */}
             <Card
               className={`max-w-md mx-auto border-2 transition-all duration-300 ${
-                dailyChallengeCompleted ? "opacity-75 cursor-not-allowed" : "cursor-pointer transform hover:scale-105"
+                dailyChallengeCompleted
+                  ? "opacity-75 cursor-not-allowed"
+                  : "cursor-pointer transform hover:scale-105"
               } ${
                 isDarkTheme
-                  ? "bg-gradient-to-r " + dailyChallenge.bgColor + " border-yellow-400/70"
-                  : "bg-gradient-to-r " + dailyChallenge.bgColor + " border-yellow-600/70"
+                  ? "bg-gradient-to-r " +
+                    dailyChallenge.bgColor +
+                    " border-yellow-400/70"
+                  : "bg-gradient-to-r " +
+                    dailyChallenge.bgColor +
+                    " border-yellow-600/70"
               }`}
-              onClick={dailyChallengeCompleted ? undefined : () => startDailyChallenge()}
+              onClick={
+                dailyChallengeCompleted
+                  ? undefined
+                  : () => startDailyChallenge()
+              }
             >
               <CardContent className="text-center p-6 relative overflow-hidden">
                 {/* Fire animation background */}
@@ -738,37 +758,52 @@ export default function WordCascadeGame() {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-center gap-2 mb-3">
-                    <div className={`text-2xl ${dailyChallengeCompleted ? "" : "animate-bounce"}`}>
+                    <div
+                      className={`text-2xl ${
+                        dailyChallengeCompleted ? "" : "animate-bounce"
+                      }`}
+                    >
                       {dailyChallengeCompleted ? "✅" : dailyChallenge.icon}
                     </div>
-                    <h3 className="font-bold text-white text-lg drop-shadow-lg">{dailyChallenge.name}</h3>
-                    <div className={`text-2xl ${dailyChallengeCompleted ? "" : "animate-bounce"}`}>
+                    <h3 className="font-bold text-white text-lg drop-shadow-lg">
+                      {dailyChallenge.name}
+                    </h3>
+                    <div
+                      className={`text-2xl ${
+                        dailyChallengeCompleted ? "" : "animate-bounce"
+                      }`}
+                    >
                       {dailyChallengeCompleted ? "✅" : dailyChallenge.icon}
                     </div>
                   </div>
 
-                  <p className="text-white/90 text-sm mb-2 drop-shadow">{dailyChallenge.description}</p>
+                  {/* <p className="text-white/90 text-sm mb-2 drop-shadow">{dailyChallenge.description}</p> */}
                   <p className="text-white/80 text-xs mb-3">
-                    ⏱️ 60 seconds • Single puzzle • {dailyChallenge.category} category
+                    ⏱️ 60 seconds • Single puzzle • {dailyChallenge.category}{" "}
+                    category
                   </p>
 
-                  <div className="flex justify-center items-center gap-2 mb-3">
+                  {/* <div className="flex justify-center items-center gap-2 mb-3">
                     <Badge className="bg-yellow-500 text-black font-bold px-3 py-1 animate-pulse">
                       {dailyChallenge.bonus}
                     </Badge>
                     {dailyChallengeCompleted && (
                       <Badge className="bg-green-500 text-white font-bold px-3 py-1">✅ COMPLETED TODAY</Badge>
                     )}
-                  </div>
+                  </div> */}
 
                   <div className="text-white/90 text-sm font-bold">
                     {dailyChallengeCompleted ? (
                       <div>
                         <div className="mb-2">🎉 CHALLENGE COMPLETED! 🎉</div>
-                        <div className="text-xs opacity-75">Come back tomorrow for a new challenge</div>
+                        <div className="text-xs opacity-75">
+                          Come back tomorrow for a new challenge
+                        </div>
                       </div>
                     ) : (
-                      <div className="animate-pulse">🔥 CLICK TO START 🔥</div>
+                      <div className="animate-pulse text-stone-950">
+                        🔥 CLICK TO START 🔥
+                      </div>
                     )}
                   </div>
                 </div>
@@ -778,7 +813,11 @@ export default function WordCascadeGame() {
             {/* Game Mode Selection */}
             <Card className={`max-w-md mx-auto ${themeClasses.card}`}>
               <CardContent className="p-6">
-                <h3 className={`text-lg font-bold mb-4 text-center ${themeClasses.text}`}>Choose Game Mode</h3>
+                <h3
+                  className={`text-lg font-bold mb-4 text-center ${themeClasses.text}`}
+                >
+                  Choose Game Mode
+                </h3>
                 <div className="space-y-3">
                   {["classic", "lightning", "chain", "battle"].map((mode) => (
                     <button
@@ -787,14 +826,24 @@ export default function WordCascadeGame() {
                       className={`w-full p-3 rounded-lg border-2 text-left transition-all ${
                         gameMode === mode
                           ? "border-blue-400 bg-blue-600/20"
-                          : `border-gray-400 ${isDarkTheme ? "bg-gray-600/10 hover:bg-gray-600/20" : "bg-gray-100/50 hover:bg-gray-200/50"}`
+                          : `border-gray-400 ${
+                              isDarkTheme
+                                ? "bg-gray-600/10 hover:bg-gray-600/20"
+                                : "bg-gray-100/50 hover:bg-gray-200/50"
+                            }`
                       }`}
                     >
-                      <div className={`font-semibold ${themeClasses.text} capitalize mb-1`}>
-                        {mode === "classic" && "🎯"} {mode === "lightning" && "⚡"} {mode === "chain" && "🔗"}{" "}
-                        {mode === "battle" && "⚔️"} {mode}
+                      <div
+                        className={`font-semibold ${themeClasses.text} capitalize mb-1`}
+                      >
+                        {mode === "classic" && "🎯"}{" "}
+                        {mode === "lightning" && "⚡"}{" "}
+                        {mode === "chain" && "🔗"} {mode === "battle" && "⚔️"}{" "}
+                        {mode}
                       </div>
-                      <div className={`text-xs ${themeClasses.textSecondary}`}>{getModeDescription(mode)}</div>
+                      <div className={`text-xs ${themeClasses.textSecondary}`}>
+                        {getModeDescription(mode)}
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -803,22 +852,40 @@ export default function WordCascadeGame() {
 
             {/* Main Start Card */}
             <Card className={`max-w-md mx-auto ${themeClasses.card}`}>
-              <CardContent className="text-center p-8">
+              <CardContent className="text-center p-8 border border-pink-700 rounded-md">
                 <div className="mb-6">
                   <div className="text-6xl mb-4">🎯</div>
-                  <h2 className={`text-2xl font-bold mb-2 ${themeClasses.text}`}>Level {level}</h2>
-                  <p className={`${themeClasses.textSecondary} mb-4`}>{getModeDescription(gameMode)}</p>
+                  <h2
+                    className={`text-2xl font-bold mb-2 ${themeClasses.text}`}
+                  >
+                    Level {level}
+                  </h2>
+                  <p className={`${themeClasses.textSecondary} mb-4`}>
+                    {getModeDescription(gameMode)}
+                  </p>
                   <div className={`text-sm ${themeClasses.textSecondary} mb-4`}>
                     Level {level} Difficulty:
                     {gameMode === "lightning" &&
-                      ` ${Math.min(4 + level, 8)} puzzles in ${Math.max(90, 150 - level * 10)}s`}
+                      ` ${Math.min(4 + level, 8)} puzzles in ${Math.max(
+                        90,
+                        150 - level * 10
+                      )}s`}
                     {gameMode === "chain" &&
-                      ` ${Math.min(3 + level, 7)} puzzles in ${Math.max(180, 270 - level * 15)}s`}
+                      ` ${Math.min(3 + level, 7)} puzzles in ${Math.max(
+                        180,
+                        270 - level * 15
+                      )}s`}
                     {gameMode === "battle" &&
-                      ` ${Math.min(2 + level, 6)} puzzles in ${Math.max(120, 210 - level * 15)}s`}
-                    {gameMode === "classic" && ` ${Math.min(3 + level, 6)} puzzles in 5 minutes`}
+                      ` ${Math.min(2 + level, 6)} puzzles in ${Math.max(
+                        120,
+                        210 - level * 15
+                      )}s`}
+                    {gameMode === "classic" &&
+                      ` ${Math.min(3 + level, 6)} puzzles in 5 minutes`}
                   </div>
-                  <div className={`flex justify-center gap-4 text-sm ${themeClasses.textSecondary} mb-4`}>
+                  <div
+                    className={`flex justify-center gap-4 text-sm ${themeClasses.textSecondary} mb-4`}
+                  >
                     <div className="flex items-center gap-1">
                       <Award className="w-4 h-4" />
                       Score: {score}
@@ -832,13 +899,19 @@ export default function WordCascadeGame() {
 
                 {/* Word Generation Options */}
                 <div className="mb-6 space-y-3">
-                  <div className={`text-sm ${themeClasses.textSecondary}`}>Word Generation:</div>
+                  <div className={`text-sm ${themeClasses.textSecondary}`}>
+                    Word Generation:
+                  </div>
                   <div className="flex gap-2 justify-center">
                     <Button
                       onClick={() => setUseRandomWords(false)}
                       variant={!useRandomWords ? "default" : "outline"}
                       size="sm"
-                      className={!useRandomWords ? "bg-blue-600 hover:bg-blue-700" : ""}
+                      className={
+                        !useRandomWords
+                          ? "bg-purple-600 hover:bg-purple-700"
+                          : ""
+                      }
                     >
                       Curated Words
                     </Button>
@@ -846,15 +919,24 @@ export default function WordCascadeGame() {
                       onClick={() => setUseRandomWords(true)}
                       variant={useRandomWords ? "default" : "outline"}
                       size="sm"
-                      className={useRandomWords ? "bg-purple-600 hover:bg-purple-700" : ""}
+                      className={
+                        useRandomWords
+                          ? "bg-purple-600 hover:bg-purple-700"
+                          : ""
+                      }
                     >
                       Random Words
                     </Button>
                   </div>
                 </div>
 
-                <Button onClick={startGame} size="lg" className="w-full bg-blue-600 hover:bg-blue-700">
-                  Start {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)} Mode
+                <Button
+                  onClick={startGame}
+                  size="lg"
+                  className="w-full bg-blue-600 hover:bg-blue-700"
+                >
+                  Start {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)}{" "}
+                  Mode
                 </Button>
               </CardContent>
             </Card>
@@ -862,7 +944,11 @@ export default function WordCascadeGame() {
             {/* Achievements */}
             <Card className={`max-w-md mx-auto ${themeClasses.card}`}>
               <CardContent className="p-4">
-                <h3 className={`text-lg font-bold mb-3 text-center ${themeClasses.text}`}>Achievements</h3>
+                <h3
+                  className={`text-lg font-bold mb-3 text-center ${themeClasses.text}`}
+                >
+                  Achievements
+                </h3>
                 <div className="grid grid-cols-2 gap-2">
                   {achievements.map((achievement) => (
                     <div
@@ -870,12 +956,20 @@ export default function WordCascadeGame() {
                       className={`p-2 rounded-lg border text-center ${
                         achievement.unlocked
                           ? "border-yellow-400 bg-yellow-600/20"
-                          : `border-gray-400 ${isDarkTheme ? "bg-gray-600/10" : "bg-gray-100/50"}`
+                          : `border-gray-400 ${
+                              isDarkTheme ? "bg-gray-600/10" : "bg-gray-100/50"
+                            }`
                       }`}
                     >
                       <div className="text-lg mb-1">{achievement.icon}</div>
-                      <div className={`text-xs font-semibold ${themeClasses.text}`}>{achievement.name}</div>
-                      <div className={`text-xs ${themeClasses.textSecondary}`}>{achievement.description}</div>
+                      <div
+                        className={`text-xs font-semibold ${themeClasses.text}`}
+                      >
+                        {achievement.name}
+                      </div>
+                      <div className={`text-xs ${themeClasses.textSecondary}`}>
+                        {achievement.description}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -885,55 +979,77 @@ export default function WordCascadeGame() {
         ) : !gameActive && puzzles.length > 0 ? (
           /* Results Screen */
           <Card className={`max-w-md mx-auto ${themeClasses.card}`}>
-            <CardContent className="text-center p-8">
+            <CardContent className="text-center p-8 border border-blue-500 rounded-md">
               <div className="mb-6">
                 {completedPuzzles === totalPuzzles ? (
                   <>
                     <div className="text-6xl mb-4">🎉</div>
-                    <h2 className={`text-2xl font-bold mb-2 ${themeClasses.text} text-green-400`}>
-                      Perfect! {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)} Complete!
+                    <h2
+                      className={`text-2xl font-bold mb-2 ${themeClasses.text} text-green-400`}
+                    >
+                      Perfect!{" "}
+                      {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)}{" "}
+                      Complete!
                     </h2>
-                    <p className={`${themeClasses.textSecondary} mb-4`}>You solved all {totalPuzzles} puzzles!</p>
+                    <p className={`${themeClasses.textSecondary} mb-4`}>
+                      You solved all {totalPuzzles} puzzles!
+                    </p>
                   </>
                 ) : completedPuzzles > 0 ? (
                   <>
                     <div className="text-6xl mb-4">👏</div>
-                    <h2 className={`text-2xl font-bold mb-2 ${themeClasses.text} text-yellow-400`}>
-                      Good Job! {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)} Complete
+                    <h2
+                      className={`text-2xl font-bold mb-2 ${themeClasses.text} text-yellow-400`}
+                    >
+                      Good Job!{" "}
+                      {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)}{" "}
+                      Complete
                     </h2>
                     <p className={`${themeClasses.textSecondary} mb-4`}>
-                      You solved {completedPuzzles} out of {totalPuzzles} puzzles
+                      You solved {completedPuzzles} out of {totalPuzzles}{" "}
+                      puzzles
                     </p>
                   </>
                 ) : (
                   <>
                     <div className="text-6xl mb-4">😔</div>
-                    <h2 className={`text-2xl font-bold mb-2 ${themeClasses.text} text-red-400`}>
-                      {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)} Failed
+                    <h2
+                      className={`text-2xl font-bold mb-2 ${themeClasses.text} text-red-400`}
+                    >
+                      {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)}{" "}
+                      Failed
                     </h2>
-                    <p className={`${themeClasses.textSecondary} mb-4`}>No puzzles completed. Try again!</p>
+                    <p className={`${themeClasses.textSecondary} mb-4`}>
+                      No puzzles completed. Try again!
+                    </p>
                   </>
                 )}
 
-                <div className={`grid grid-cols-3 gap-4 text-sm ${themeClasses.textSecondary} mb-6`}>
+                <div
+                  className={`grid grid-cols-3 gap-4 text-sm ${themeClasses.textSecondary} mb-6`}
+                >
                   <div className="flex items-center justify-center gap-1">
                     <Trophy className="w-4 h-4 text-green-400" />
-                    <span>Completed: {completedPuzzles}</span>
+                    <span>: {completedPuzzles}</span>
                   </div>
                   <div className="flex items-center justify-center gap-1">
                     <AlertCircle className="w-4 h-4 text-red-400" />
-                    <span>Failed: {totalPuzzles - completedPuzzles}</span>
+                    <span>: {totalPuzzles - completedPuzzles}</span>
                   </div>
                   <div className="flex items-center justify-center gap-1">
                     <Award className="w-4 h-4 text-blue-400" />
-                    <span>Score: {score}</span>
+                    <span>: {score}</span>
                   </div>
                 </div>
 
                 {/* Show newly unlocked achievements */}
                 {achievements.filter((a) => a.unlocked).length > 0 && (
                   <div className="mb-4">
-                    <h4 className={`text-sm font-bold ${themeClasses.text} mb-2`}>🏆 Achievements Unlocked!</h4>
+                    <h4
+                      className={`text-sm font-bold ${themeClasses.text} mb-2`}
+                    >
+                      🏆 Achievements Unlocked!
+                    </h4>
                     <div className="flex justify-center gap-2">
                       {achievements
                         .filter((a) => a.unlocked)
@@ -941,7 +1057,11 @@ export default function WordCascadeGame() {
                         .map((achievement) => (
                           <div key={achievement.id} className="text-center">
                             <div className="text-2xl">{achievement.icon}</div>
-                            <div className={`text-xs ${themeClasses.textSecondary}`}>{achievement.name}</div>
+                            <div
+                              className={`text-xs ${themeClasses.textSecondary}`}
+                            >
+                              {achievement.name}
+                            </div>
                           </div>
                         ))}
                     </div>
@@ -951,14 +1071,18 @@ export default function WordCascadeGame() {
                 {/* Daily Challenge Completion */}
                 {isDailyChallengeMode && (
                   <div className="mb-4">
-                    <div className={`p-4 rounded-lg border-2 bg-gradient-to-r ${dailyChallenge.bgColor}`}>
+                    <div
+                      className={`p-4 rounded-lg border-2 bg-gradient-to-r ${dailyChallenge.bgColor}`}
+                    >
                       <h4 className="text-lg font-bold text-white text-center mb-2 drop-shadow-lg">
                         🔥 {dailyChallenge.name} COMPLETE! 🔥
                       </h4>
                       <div className="text-center text-white/90 text-sm">
                         <p>Category: {puzzles[0]?.category}</p>
                         <p>Bonus Applied: {dailyChallenge.bonus}</p>
-                        <p className="font-bold mt-2">Come back tomorrow for a new challenge!</p>
+                        <p className="font-bold mt-2">
+                          Come back tomorrow for a new challenge!
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -966,25 +1090,27 @@ export default function WordCascadeGame() {
               </div>
 
               <div className="space-y-3">
-                {!isDailyChallengeMode && completedPuzzles >= Math.ceil(totalPuzzles / 2) ? (
+                {!isDailyChallengeMode &&
+                completedPuzzles >= Math.ceil(totalPuzzles / 2) ? (
                   <Button
                     onClick={() => {
-                      setLevel((prev) => prev + 1)
-                      setPuzzles([])
-                      setActivePuzzleId(null)
+                      setLevel((prev) => prev + 1);
+                      setPuzzles([]);
+                      setActivePuzzleId(null);
                     }}
                     size="lg"
                     className="w-full bg-green-600 hover:bg-green-700"
                   >
-                    Next Level ({level + 1}) - {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)}
+                    Next Level ({level + 1}) -{" "}
+                    {gameMode.charAt(0).toUpperCase() + gameMode.slice(1)}
                   </Button>
                 ) : null}
 
                 {!isDailyChallengeMode && (
                   <Button
                     onClick={() => {
-                      setPuzzles([])
-                      setActivePuzzleId(null)
+                      setPuzzles([]);
+                      setActivePuzzleId(null);
                     }}
                     variant="outline"
                     size="lg"
@@ -996,11 +1122,11 @@ export default function WordCascadeGame() {
 
                 <Button
                   onClick={() => {
-                    setPuzzles([])
-                    setActivePuzzleId(null)
-                    setLevel(1)
-                    setScore(0)
-                    setIsDailyChallengeMode(false)
+                    setPuzzles([]);
+                    setActivePuzzleId(null);
+                    setLevel(1);
+                    setScore(0);
+                    setIsDailyChallengeMode(false);
                   }}
                   variant="outline"
                   size="sm"
@@ -1015,22 +1141,22 @@ export default function WordCascadeGame() {
           /* Game Screen */
           <div className="space-y-6">
             {/* Game Stats */}
-            <div className="flex flex-wrap justify-center gap-4 mb-6">
+            <div className="flex flex-nowrap justify-center gap-2 mb-6">
               <Badge className="bg-blue-600 text-white px-4 py-2">
                 <Timer className="w-4 h-4 mr-1" />
                 {formatTime(timeLeft)}
               </Badge>
               <Badge className="bg-green-600 text-white px-4 py-2">
-                <Award className="w-4 h-4 mr-1" />
-                Score: {score}
+                <Award className="w-4 h-4 mr-1" />: {score}
               </Badge>
               <Badge className="bg-orange-600 text-white px-4 py-2">
-                <Flame className="w-4 h-4 mr-1" />
-                Streak: {streak}
+                <Flame className="w-4 h-4 mr-1" />: {streak}
               </Badge>
               <Badge
                 className={`text-white px-4 py-2 ${
-                  isDailyChallengeMode ? `bg-gradient-to-r ${dailyChallenge.bgColor}` : "bg-purple-600"
+                  isDailyChallengeMode
+                    ? `bg-gradient-to-r ${dailyChallenge.bgColor}`
+                    : "bg-purple-600"
                 }`}
               >
                 <Target className="w-4 h-4 mr-1" />
@@ -1041,25 +1167,33 @@ export default function WordCascadeGame() {
             </div>
 
             {/* Progress */}
-            <div className="max-w-md mx-auto">
-              <div className={`flex justify-between text-sm mb-2 ${themeClasses.text}`}>
+            {/* <div className="max-w-md mx-auto">
+              <div
+                className={`flex justify-between text-sm mb-2 ${themeClasses.text}`}
+              >
                 <span>Progress</span>
                 <span>
                   {completedPuzzles}/{totalPuzzles}
                 </span>
               </div>
-              <Progress value={(completedPuzzles / totalPuzzles) * 100} className="h-3" />
-            </div>
+              <Progress
+                value={(completedPuzzles / totalPuzzles) * 100}
+                className="h-3"
+                
+              />
+            </div> */}
 
             {/* Power-ups */}
             <div className="flex justify-center gap-2 flex-wrap">
               {!hintUsed && activePuzzleId !== null && (
                 <Button
                   onClick={() => {
-                    const puzzle = puzzles[activePuzzleId]
+                    const puzzle = puzzles[activePuzzleId];
                     if (puzzle) {
-                      alert(`Hint: The word contains the letter "${puzzle.word[0]}" in position 1`)
-                      setHintUsed(true)
+                      alert(
+                        `Hint: The word contains the letter "${puzzle.word[0]}" in position 1`
+                      );
+                      setHintUsed(true);
                     }
                   }}
                   variant="outline"
@@ -1078,28 +1212,30 @@ export default function WordCascadeGame() {
 
             {/* Input */}
             <div className="max-w-md mx-auto space-y-2">
-              <Input
-                value={currentGuess}
-                onChange={(e) =>
-                  setCurrentGuess(
-                    e.target.value
-                      .toUpperCase()
-                      .replace(/[^A-Z]/g, "")
-                      .slice(0, 4),
-                  )
-                }
-                onKeyPress={(e) => e.key === "Enter" && handleSubmitGuess()}
-                placeholder="Enter 4-letter word"
-                className={`text-center text-lg font-mono tracking-wider ${themeClasses.input}`}
-                maxLength={4}
-              />
-              <Button
-                onClick={handleSubmitGuess}
-                disabled={currentGuess.length !== 4}
-                className="w-full bg-blue-600 hover:bg-blue-700"
-              >
-                Submit Guess
-              </Button>
+              <div className="flex gap-2">
+                <Input
+                  value={currentGuess}
+                  onChange={(e) =>
+                    setCurrentGuess(
+                      e.target.value
+                        .toUpperCase()
+                        .replace(/[^A-Z]/g, "")
+                        .slice(0, 4)
+                    )
+                  }
+                  onKeyPress={(e) => e.key === "Enter" && handleSubmitGuess()}
+                  placeholder="Enter 4-letter word"
+                  className={`text-center text-lg font-mono tracking-wider ${themeClasses.input}`}
+                  maxLength={4}
+                />
+                <Button
+                  onClick={handleSubmitGuess}
+                  disabled={currentGuess.length !== 4}
+                  className="w-1/5 bg-blue-600 hover:bg-blue-700"
+                >
+                  →
+                </Button>
+              </div>
             </div>
 
             {/* Mobile-Optimized Single Puzzle View */}
@@ -1114,12 +1250,16 @@ export default function WordCascadeGame() {
                       activePuzzleId === puzzle.id
                         ? "border-blue-400 bg-blue-600 text-white"
                         : puzzle.completed
-                          ? "border-green-400 bg-green-600 text-white cursor-pointer hover:bg-green-500"
-                          : puzzle.attempts <= 0
-                            ? "border-red-400 bg-red-600 text-white cursor-pointer hover:bg-red-500"
-                            : puzzle.attempts <= 2
-                              ? "border-red-400 bg-red-600/20 text-red-300"
-                              : `border-gray-400 ${isDarkTheme ? "bg-gray-600/20 text-gray-300" : "bg-gray-200/50 text-gray-600"}`
+                        ? "border-green-400 bg-green-600 text-white cursor-pointer hover:bg-green-500"
+                        : puzzle.attempts <= 0
+                        ? "border-red-400 bg-red-600 text-white cursor-pointer hover:bg-red-500"
+                        : puzzle.attempts <= 2
+                        ? "border-red-400 bg-red-600/20 text-red-300"
+                        : `border-gray-400 ${
+                            isDarkTheme
+                              ? "bg-gray-600/20 text-gray-300"
+                              : "bg-gray-200/50 text-gray-600"
+                          }`
                     }`}
                   >
                     {puzzle.completed ? (
@@ -1141,13 +1281,21 @@ export default function WordCascadeGame() {
 
               {/* Active Puzzle Display */}
               {activePuzzleId !== null && (
-                <Card className={themeClasses.puzzleCard}>
+                <Card
+                  className={`${themeClasses.puzzleCard} border border-gray-300`}
+                >
                   <CardHeader className="text-center pb-4">
                     <div className="flex justify-between items-center">
-                      <CardTitle className={themeClasses.text}>Puzzle {activePuzzleId + 1}</CardTitle>
+                      <CardTitle className={themeClasses.text}>
+                        Puzzle {activePuzzleId + 1}
+                      </CardTitle>
                       <div className="flex items-center gap-2">
-                        <Badge className="bg-red-500">{puzzles[activePuzzleId]?.attempts} attempts left</Badge>
-                        {puzzles[activePuzzleId]?.completed && <Trophy className="w-5 h-5 text-yellow-400" />}
+                        <Badge className="bg-red-500">
+                          {puzzles[activePuzzleId]?.attempts} attempts left
+                        </Badge>
+                        {puzzles[activePuzzleId]?.completed && (
+                          <Trophy className="w-5 h-5 text-yellow-400" />
+                        )}
                       </div>
                     </div>
                     <p className={`${themeClasses.textSecondary} text-sm`}>
@@ -1168,8 +1316,8 @@ export default function WordCascadeGame() {
                                 letter.status === "correct"
                                   ? "bg-green-500 border-green-400"
                                   : letter.status === "present"
-                                    ? "bg-yellow-500 border-yellow-400"
-                                    : "bg-gray-500 border-gray-400"
+                                  ? "bg-yellow-500 border-yellow-400"
+                                  : "bg-gray-500 border-gray-400"
                               }`}
                             >
                               {letter.letter}
@@ -1179,20 +1327,23 @@ export default function WordCascadeGame() {
                       ))}
 
                       {/* Current guess preview */}
-                      {!puzzles[activePuzzleId]?.completed && puzzles[activePuzzleId]?.attempts > 0 && (
-                        <div className="flex gap-2 justify-center">
-                          {Array.from({ length: 4 }, (_, letterIndex) => (
-                            <div
-                              key={letterIndex}
-                              className={`w-12 h-12 flex items-center justify-center rounded-lg border-2 border-blue-400 font-bold text-lg ${
-                                isDarkTheme ? "bg-blue-900/30 text-white" : "bg-blue-100/50 text-gray-900"
-                              }`}
-                            >
-                              {currentGuess[letterIndex] || ""}
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                      {!puzzles[activePuzzleId]?.completed &&
+                        puzzles[activePuzzleId]?.attempts > 0 && (
+                          <div className="flex gap-2 justify-center">
+                            {Array.from({ length: 4 }, (_, letterIndex) => (
+                              <div
+                                key={letterIndex}
+                                className={`w-12 h-12 flex items-center justify-center rounded-lg border-2 border-blue-400 font-bold text-lg ${
+                                  isDarkTheme
+                                    ? "bg-blue-900/30 text-white"
+                                    : "bg-blue-100/50 text-gray-900"
+                                }`}
+                              >
+                                {currentGuess[letterIndex] || ""}
+                              </div>
+                            ))}
+                          </div>
+                        )}
 
                       {/* Empty rows */}
                       {!puzzles[activePuzzleId]?.completed &&
@@ -1201,21 +1352,27 @@ export default function WordCascadeGame() {
                           {
                             length: Math.max(
                               0,
-                              (gameMode === "lightning" ? 2 : 5) - (puzzles[activePuzzleId]?.guesses.length || 0),
+                              (gameMode === "lightning" ? 2 : 5) -
+                                (puzzles[activePuzzleId]?.guesses.length || 0)
                             ),
                           },
                           (_, index) => (
-                            <div key={`empty-${index}`} className="flex gap-2 justify-center">
+                            <div
+                              key={`empty-${index}`}
+                              className="flex gap-2 justify-center"
+                            >
                               {Array.from({ length: 4 }, (_, letterIndex) => (
                                 <div
                                   key={letterIndex}
                                   className={`w-12 h-12 border-2 rounded-lg ${
-                                    isDarkTheme ? "border-gray-600 bg-gray-800/30" : "border-gray-300 bg-gray-100/30"
+                                    isDarkTheme
+                                      ? "border-gray-600 bg-gray-800/30"
+                                      : "border-gray-300 bg-gray-100/30"
                                   }`}
                                 />
                               ))}
                             </div>
-                          ),
+                          )
                         )}
                     </div>
 
@@ -1223,44 +1380,82 @@ export default function WordCascadeGame() {
                     {puzzles[activePuzzleId]?.completed && (
                       <div
                         className={`text-center p-4 rounded-lg border ${
-                          isDarkTheme ? "bg-green-900/30 border-green-500/50" : "bg-green-100/50 border-green-300/50"
+                          isDarkTheme
+                            ? "bg-green-900/30 border-green-500/50"
+                            : "bg-green-100/50 border-green-300/50"
                         }`}
                       >
                         <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                        <p className={`font-semibold ${isDarkTheme ? "text-green-300" : "text-green-700"}`}>
+                        <p
+                          className={`font-semibold ${
+                            isDarkTheme ? "text-green-300" : "text-green-700"
+                          }`}
+                        >
                           Puzzle Completed! ✅
                         </p>
-                        <p className={`text-sm ${isDarkTheme ? "text-green-200" : "text-green-600"}`}>
-                          Answer: <span className="font-mono font-bold">{puzzles[activePuzzleId]?.word}</span>
+                        <p
+                          className={`text-sm ${
+                            isDarkTheme ? "text-green-200" : "text-green-600"
+                          }`}
+                        >
+                          Answer:{" "}
+                          <span className="font-mono font-bold">
+                            {puzzles[activePuzzleId]?.word}
+                          </span>
                         </p>
-                        <p className={`text-xs ${isDarkTheme ? "text-green-200" : "text-green-600"}`}>
-                          Solved in {(gameMode === "lightning" ? 3 : 6) - puzzles[activePuzzleId]?.attempts} attempts
+                        <p
+                          className={`text-xs ${
+                            isDarkTheme ? "text-green-200" : "text-green-600"
+                          }`}
+                        >
+                          Solved in{" "}
+                          {(gameMode === "lightning" ? 3 : 6) -
+                            puzzles[activePuzzleId]?.attempts}{" "}
+                          attempts
                         </p>
                       </div>
                     )}
 
                     {/* Puzzle failed message */}
-                    {puzzles[activePuzzleId]?.attempts <= 0 && !puzzles[activePuzzleId]?.completed && (
-                      <div
-                        className={`text-center p-4 rounded-lg border ${
-                          isDarkTheme ? "bg-red-900/30 border-red-500/50" : "bg-red-100/50 border-red-300/50"
-                        }`}
-                      >
-                        <AlertCircle className="w-8 h-8 text-red-400 mx-auto mb-2" />
-                        <p className={`font-semibold ${isDarkTheme ? "text-red-300" : "text-red-700"}`}>Failed ❌</p>
-                        <p className={`text-sm ${isDarkTheme ? "text-red-200" : "text-red-600"}`}>
-                          Answer was: <span className="font-mono font-bold">{puzzles[activePuzzleId]?.word}</span>
-                        </p>
-                      </div>
-                    )}
+                    {puzzles[activePuzzleId]?.attempts <= 0 &&
+                      !puzzles[activePuzzleId]?.completed && (
+                        <div
+                          className={`text-center p-4 rounded-lg border ${
+                            isDarkTheme
+                              ? "bg-red-900/30 border-red-500/50"
+                              : "bg-red-100/50 border-red-300/50"
+                          }`}
+                        >
+                          <AlertCircle className="w-8 h-8 text-red-400 mx-auto mb-2" />
+                          <p
+                            className={`font-semibold ${
+                              isDarkTheme ? "text-red-300" : "text-red-700"
+                            }`}
+                          >
+                            Failed ❌
+                          </p>
+                          <p
+                            className={`text-sm ${
+                              isDarkTheme ? "text-red-200" : "text-red-600"
+                            }`}
+                          >
+                            Answer was:{" "}
+                            <span className="font-mono font-bold">
+                              {puzzles[activePuzzleId]?.word}
+                            </span>
+                          </p>
+                        </div>
+                      )}
 
                     {/* Navigation buttons for mobile */}
                     <div className="flex justify-between pt-4">
                       <Button
                         onClick={() => {
-                          const currentIndex = puzzles.findIndex((p) => p.id === activePuzzleId)
+                          const currentIndex = puzzles.findIndex(
+                            (p) => p.id === activePuzzleId
+                          );
                           if (currentIndex > 0) {
-                            setActivePuzzleId(puzzles[currentIndex - 1].id)
+                            setActivePuzzleId(puzzles[currentIndex - 1].id);
                           }
                         }}
                         variant="outline"
@@ -1270,16 +1465,21 @@ export default function WordCascadeGame() {
                             ? "bg-black/20 border-gray-500/50 text-gray-300"
                             : "bg-white/50 border-gray-300 text-gray-600"
                         }`}
-                        disabled={puzzles.findIndex((p) => p.id === activePuzzleId) === 0}
+                        disabled={
+                          puzzles.findIndex((p) => p.id === activePuzzleId) ===
+                          0
+                        }
                       >
                         ← Previous
                       </Button>
 
                       <Button
                         onClick={() => {
-                          const currentIndex = puzzles.findIndex((p) => p.id === activePuzzleId)
+                          const currentIndex = puzzles.findIndex(
+                            (p) => p.id === activePuzzleId
+                          );
                           if (currentIndex < puzzles.length - 1) {
-                            setActivePuzzleId(puzzles[currentIndex + 1].id)
+                            setActivePuzzleId(puzzles[currentIndex + 1].id);
                           }
                         }}
                         variant="outline"
@@ -1289,7 +1489,10 @@ export default function WordCascadeGame() {
                             ? "bg-black/20 border-gray-500/50 text-gray-300"
                             : "bg-white/50 border-gray-300 text-gray-600"
                         }`}
-                        disabled={puzzles.findIndex((p) => p.id === activePuzzleId) === puzzles.length - 1}
+                        disabled={
+                          puzzles.findIndex((p) => p.id === activePuzzleId) ===
+                          puzzles.length - 1
+                        }
                       >
                         Next →
                       </Button>
@@ -1302,5 +1505,5 @@ export default function WordCascadeGame() {
         )}
       </div>
     </div>
-  )
+  );
 }
