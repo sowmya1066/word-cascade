@@ -1141,7 +1141,7 @@ export default function WordCascadeGame() {
           /* Game Screen */
           <div className="space-y-6">
             {/* Game Stats */}
-            <div className="flex flex-nowrap justify-center gap-2 mb-6">
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
               <Badge className="bg-blue-600 text-white px-4 py-2">
                 <Timer className="w-4 h-4 mr-1" />
                 {formatTime(timeLeft)}
